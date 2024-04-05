@@ -6,14 +6,11 @@ Test Setup          Open the browser with the demo url
 Test Teardown       Close Browser Session
 Resource            Resource.robot
 
-*** Variables ***
-${message_locator}          xpath://div[@class='alert alert-danger alert-dismissible']
-
 *** Test Cases ***
 Validating Unsuccessful login
     Fill the login form     ${E-mail}       ${invalid_Password}
-    Wait until the element is located on the page       ${message_locator}
-    Verify if the error message displayed is correct    ${message_locator}      ${error_message}
+    Wait until the element is located on the page       ${errormessage_locator}
+    Verify if the error message displayed is correct    ${errormessage_locator}       ${error_message}
 
 *** Keywords ***
 Fill the login form
@@ -23,10 +20,6 @@ Fill the login form
     Input Text        input-email     ${Email}
     Input Password    input-password  ${password}
     Click Button      css:input[value='Login']
-
-Wait until the element is located on the page
-    [Arguments]                                 ${element}
-    Wait Until Element is visible               ${element}
 
 Verify if the error message displayed is correct
    [Arguments]                   ${element}     ${message}
